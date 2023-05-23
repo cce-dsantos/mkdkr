@@ -474,7 +474,6 @@ instance:() {
   local -r args="${*:2}"
 
   _remove_running_job
-  _network_create
   _docker_image_pull "${image}"
 
   _pretty "cyan" "\ninstance: ${image} ${args[*]}"
@@ -484,7 +483,6 @@ instance:() {
     -v "${PWD}":"${PWD}" \
     --workdir "${PWD}" \
     --entrypoint "" \
-    --network "network_${MKDKR_JOB_NAME}" \
     $args \
     --name "job_${MKDKR_JOB_NAME}" \
     "${image}" sleep "${MKDKR_TTL:-3600}" >&2
